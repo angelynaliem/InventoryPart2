@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="empty_title_padding">16dp</dimen>
+
+    <dimen name="empty_subtitle_padding">8dp</dimen>
+
+    <dimen name="add_toy_button_margin">16dp</dimen>
+
+    <dimen name="activity_margin">16dp</dimen>
+
+
+</resources>

@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">Toys Inventory</string>
+
+    <string name="empty_view_title_text">It\'s a bit lonely here...</string>
+
+    <string name="empty_view_subtitle_text">Get started by adding a toy</string>
+
+    <string name="category_overview">Overview</string>
+
+    <string name="hint_toy_name">Product Name (REQUIRED)</string>
+
+    <string name="hint_toy_price">Price (REQUIRED)</string>
+
+    <string name="hint_toy_quantity">Quantity (REQUIRED)</string>
+    <string name="increase_quantity">+</string>
+    <string name="decrease_quantity">-</string>
+
+    <string name="supplier_category">Supplier</string>
+
+    <string name="hint_supplier_name">Supplier Name (REQUIRED)</string>
+
+    <string name="hint_supplier_phone_number">Supplier Phone Number (REQUIRED)</string>
+
+    <string name="order_from_supplier_button">Order From Supplier</string>
+
+    <string name="delete_toy_button">Delete This Toy</string>
+
+    <string name="insert_dummy_data">Insert Dummy Data</string>
+
+    <string name="delete_all_toys">Delete All Toys</string>
+
+    <string name="action_save">Save</string>
+
+    <string name="editor_activity_title_new_toy">Add a Toy</string>
+
+    <string name="editor_activity_title_edit_toy">Edit Toy</string>
+
+    <string name="action_delete">Delete</string>
+
+    <string name="name_cannot_be_empty">Name cannot be empty</string>
+    <string name="price_cannot_be_empty">Price cannot be empty</string>
+    <string name="supplier_name_cannot_be_empty">Supplier name cannot be empty</string>
+    <string name="supplier_phone_number_cannot_be_empty">Supplier phone number cannot be empty</string>
+
+    <string name="editor_insert_toy_successful">Toy saved</string>
+
+    <string name="editor_insert_toy_failed">Error with saving toy</string>
+
+    <string name="editor_update_toy_successful">Toy updated</string>
+
+    <string name="editor_update_toy_failed">Error with updating toy</string>
+
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <string name="discard">Discard</string>
+
+    <string name="keep_editing">Keep Editing</string>
+
+    <string name="delete_dialog_msg">Delete this toy?</string>
+
+    <string name="delete">Delete</string>
+
+    <string name="cancel">Cancel</string>
+
+    <string name="editor_delete_toy_failed">Error with deleting toy</string>
+
+    <string name="editor_delete_toy_successful">Toy deleted</string>
+
+    <string name="sale_button_text">Sale</string>
+
+
+
+</resources>

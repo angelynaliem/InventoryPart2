@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="empty_subtitle_color">#A2AAB0</color>
+
+    <color name="list_item_name">#2B3D4D</color>
+
+    <color name="list_item_summary">#AEB6BD</color>
+
+    <color name="editorColorPrimary">#2a323c</color>
+
+    <color name="editorColorPrimaryDark">#20262d</color>
+
+    <color name="listItemName">#2B3D4D</color>
+    <color name="listItemPrice">#AEB6BD</color>
+    <color name="listItemQunatity">#AEB6BD</color>
+
+
+</resources>
