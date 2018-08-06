@@ -56,9 +56,9 @@
 
     <string name="delete_dialog_msg">Delete this toy?</string>
 
-    <string name="delete">Delete</string>
+    <string name="delete">Yes</string>
 
-    <string name="cancel">Cancel</string>
+    <string name="cancel">No</string>
 
     <string name="editor_delete_toy_failed">Error deleting toy</string>
 

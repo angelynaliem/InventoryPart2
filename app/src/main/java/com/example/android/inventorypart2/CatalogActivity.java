@@ -80,7 +80,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     private void deleteAllEntries() {
         int rowsDeleted = getContentResolver().delete(ToyEntry.CONTENT_URI, null, null);
-        Log.v("CatalogActivity", rowsDeleted + " rows deleted from toys database");
+        Log.v("CatalogActivity", rowsDeleted + " rows deleted");
     }
 
     @Override
@@ -143,10 +143,10 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             Uri updateUri = ContentUris.withAppendedId(ToyEntry.CONTENT_URI, toyID);
             int rowsAffected = getContentResolver().update(updateUri, values, null, null);
             if (rowsAffected == 0) {
-                Toast.makeText(this, "This toy has been sold.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "This toy is sold.", Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(this, "This toy is no longer available.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "This toy is not available.", Toast.LENGTH_LONG).show();
         }
     }
 }
