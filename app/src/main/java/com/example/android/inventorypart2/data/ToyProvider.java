@@ -58,7 +58,7 @@ public class ToyProvider extends ContentProvider {
                 break;
 
             default:
-                throw new IllegalArgumentException("Cannot query unknown URI" + uri);
+                throw new IllegalArgumentException("Unknown URI" + uri);
         }
 
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -73,34 +73,34 @@ public class ToyProvider extends ContentProvider {
             case TOYS:
                 return insertToy(uri, contentValues);
             default:
-                throw new IllegalArgumentException("Insertion is not supported for " + uri);
+                throw new IllegalArgumentException("Not supported " + uri);
         }
     }
 
     private Uri insertToy(Uri uri, ContentValues values) {
         String nameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
         if (nameValue == null) {
-            throw new IllegalArgumentException("Toy requires a name.");
+            throw new IllegalArgumentException("Please state toy's name");
         }
 
         double priceValue = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_PRICE);
         if (priceValue < 0) {
-            throw new IllegalArgumentException("Toy requires a valid price.");
+            throw new IllegalArgumentException("Please state price");
         }
 
         int quantityValue = values.getAsInteger(ToyEntry.COLUMN_PRODUCT_QUANTITY);
         if (quantityValue < 0) {
-            throw new IllegalArgumentException("Toy requires a valid quantity.");
+            throw new IllegalArgumentException("Please state quantity in stock");
         }
 
         String supplierNameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME);
         if (supplierNameValue == null) {
-            throw new IllegalArgumentException("Toy requires a supplier's name.");
+            throw new IllegalArgumentException("Please state supplier's name");
         }
 
         String supplierPhoneNumberValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER);
         if (supplierPhoneNumberValue == null) {
-            throw new IllegalArgumentException("Toy requires a supplier's phone number.");
+            throw new IllegalArgumentException("Please state supplier's contact no.");
         }
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
@@ -108,7 +108,7 @@ public class ToyProvider extends ContentProvider {
         long id = database.insert(ToyEntry.TABLE_NAME, null, values);
 
         if (id == -1) {
-            Log.e(LOG_TAG, "Failed to insert row for " + uri);
+            Log.e(LOG_TAG, "Row insertion failed " + uri);
             return null;
         }
 
@@ -128,7 +128,7 @@ public class ToyProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateToy(uri, contentValues, selection, selectionArgs);
             default:
-                throw new IllegalArgumentException("Update is not supported for " + uri);
+                throw new IllegalArgumentException("Failed to update " + uri);
         }
     }
 
@@ -137,35 +137,35 @@ public class ToyProvider extends ContentProvider {
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_NAME)) {
             String nameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
             if (nameValue == null) {
-                throw new IllegalArgumentException("Toy requires a name");
+                throw new IllegalArgumentException("Please state toy's name");
             }
         }
 
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_PRICE)) {
             double priceValue = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_PRICE);
             if (priceValue < 0) {
-                throw new IllegalArgumentException("Toy requires valid price.");
+                throw new IllegalArgumentException("Please state price");
             }
         }
 
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_QUANTITY)) {
             double quantityValue = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_QUANTITY);
             if (quantityValue < 0) {
-                throw new IllegalArgumentException("Toy requires valid quantity.");
+                throw new IllegalArgumentException("Please state quantity");
             }
         }
 
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME)) {
             String supplierNameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME);
             if (supplierNameValue == null) {
-                throw new IllegalArgumentException("Toy requires a supplier name.");
+                throw new IllegalArgumentException("Please state supplier's name");
             }
         }
 
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER)) {
             String supplierPhoneNumberValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER);
             if (supplierPhoneNumberValue == null) {
-                throw new IllegalArgumentException("Toy requires a supplier phone number.");
+                throw new IllegalArgumentException("Please state supplier's contact no.");
             }
         }
 
@@ -202,7 +202,7 @@ public class ToyProvider extends ContentProvider {
                 rowsDeleted = database.delete(ToyEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
-                throw new IllegalArgumentException("Deletion is not supported for " + uri);
+                throw new IllegalArgumentException("Failed to delete " + uri);
         }
 
         if (rowsDeleted != 0) {
@@ -221,7 +221,7 @@ public class ToyProvider extends ContentProvider {
             case TOY_ID:
                 return ToyEntry.CONTENT_ITEM_TYPE;
             default:
-                throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
+                throw new IllegalStateException("Unknown " + uri + " with " + match);
         }
     }
 }

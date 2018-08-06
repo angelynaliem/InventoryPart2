@@ -404,11 +404,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
                 if (rowsAffected == 0) {
 
-                    Toast.makeText(this, "Error while increasing quantity.",
+                    Toast.makeText(this, "Error increasing quantity.",
                             Toast.LENGTH_LONG).show();
                 } else {
 
-                    Toast.makeText(this, "Quantity has been increased.",
+                    Toast.makeText(this, "Quantity is increased.",
                             Toast.LENGTH_LONG).show();
                 }
             } else {

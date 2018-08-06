@@ -33,22 +33,22 @@
 
     <string name="editor_activity_title_new_toy">Add a Toy</string>
 
-    <string name="editor_activity_title_edit_toy">Edit Toy</string>
+    <string name="editor_activity_title_edit_toy">Edit a Toy</string>
 
-    <string name="name_cannot_be_empty">Name cannot be empty</string>
-    <string name="price_cannot_be_empty">Price cannot be empty</string>
-    <string name="supplier_name_cannot_be_empty">Supplier name cannot be empty</string>
-    <string name="supplier_phone_number_cannot_be_empty">Supplier phone number cannot be empty</string>
+    <string name="name_cannot_be_empty">Please state toy\'s name</string>
+    <string name="price_cannot_be_empty">Please state price</string>
+    <string name="supplier_name_cannot_be_empty">Please state supplier\'s name</string>
+    <string name="supplier_phone_number_cannot_be_empty">Please state supplier\'s contact no.</string>
 
     <string name="editor_insert_toy_successful">Toy saved</string>
 
-    <string name="editor_insert_toy_failed">Error with saving toy</string>
+    <string name="editor_insert_toy_failed">Error saving toy</string>
 
-    <string name="editor_update_toy_successful">Toy updated</string>
+    <string name="editor_update_toy_successful">Data saved</string>
 
-    <string name="editor_update_toy_failed">Error with updating toy</string>
+    <string name="editor_update_toy_failed">Error updating toy</string>
 
-    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="unsaved_changes_dialog_msg">Discard changes?</string>
 
     <string name="discard">Discard</string>
 
@@ -60,7 +60,7 @@
 
     <string name="cancel">Cancel</string>
 
-    <string name="editor_delete_toy_failed">Error with deleting toy</string>
+    <string name="editor_delete_toy_failed">Error deleting toy</string>
 
     <string name="editor_delete_toy_successful">Toy deleted</string>
 
