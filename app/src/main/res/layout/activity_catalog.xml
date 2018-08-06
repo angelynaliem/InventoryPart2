@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CatalogActivity">
+    tools:context=".CatalogActivity"
+    android:background="@color/main_background_color">
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <RelativeLayout
         android:id="@+id/empty_view"
@@ -24,8 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:adjustViewBounds="true"
-            android:maxHeight="100dp"
-            android:src="@drawable/ladybug"/>
+            android:maxHeight="@dimen/max_height"
+            android:src="@drawable/ladybug" />
 
         <TextView
             android:id="@+id/empty_title_text"
@@ -35,7 +35,7 @@
             android:layout_centerHorizontal="true"
             android:paddingTop="@dimen/empty_title_padding"
             android:text="@string/empty_view_title_text"
-            android:textAppearance="?android:textAppearanceMedium"/>
+            android:textAppearance="?android:textAppearanceMedium" />
 
         <TextView
             android:id="@+id/empty_subtitle_text"
@@ -46,7 +46,7 @@
             android:paddingTop="@dimen/empty_subtitle_padding"
             android:text="@string/empty_view_subtitle_text"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@color/empty_subtitle_color"/>
+            android:textColor="@color/empty_subtitle_color" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

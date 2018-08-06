@@ -9,5 +9,9 @@
 
     <dimen name="activity_margin">16dp</dimen>
 
+    <dimen name="max_height">80dp</dimen>
+
+    <dimen name="quantity_margin">500dp</dimen>
+
 
 </resources>

@@ -109,32 +109,32 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String supplierNameString = mSupplierNameEditText.getText().toString().trim();
         String supplierPhoneNumberString = mSupplierPhoneNumberEditText.getText().toString().trim();
 
-        if(TextUtils.isEmpty(nameString)) {
+        if (TextUtils.isEmpty(nameString)) {
             Toast.makeText(this, getString(R.string.name_cannot_be_empty),
                     Toast.LENGTH_LONG).show();
             finish();
             return;
         }
-        if(TextUtils.isEmpty(priceString)) {
+        if (TextUtils.isEmpty(priceString)) {
             Toast.makeText(this, getString(R.string.price_cannot_be_empty),
                     Toast.LENGTH_LONG).show();
             finish();
             return;
         }
-        if(TextUtils.isEmpty(supplierNameString)) {
+        if (TextUtils.isEmpty(supplierNameString)) {
             Toast.makeText(this, getString(R.string.supplier_name_cannot_be_empty),
                     Toast.LENGTH_LONG).show();
             finish();
             return;
         }
-        if(TextUtils.isEmpty(supplierPhoneNumberString)) {
+        if (TextUtils.isEmpty(supplierPhoneNumberString)) {
             Toast.makeText(this, getString(R.string.supplier_phone_number_cannot_be_empty),
                     Toast.LENGTH_LONG).show();
             finish();
             return;
         }
 
-        if(TextUtils.isEmpty(quantityString)) {
+        if (TextUtils.isEmpty(quantityString)) {
             quantityString = "0";
         }
 
@@ -188,16 +188,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        if (mCurrentToyUri == null) {
-            MenuItem menuItem = menu.findItem(R.id.action_delete);
-            menuItem.setVisible(false);
-        }
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
@@ -205,10 +195,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
                 saveToy();
                 finish();
-                return true;
-
-            case R.id.action_delete:
-                showDeleteConfirmationDialog();
                 return true;
 
             case android.R.id.home:
@@ -306,7 +292,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 @Override
                 public void onClick(View v) {
                     String quantityString = mQuantityEditText.getText().toString();
-                    if(quantityString.matches("")){
+                    if (quantityString.matches("")) {
                         mQuantityEditText.setText("0");
                     }
                     String stringValue = quantityString.matches("") ? "0" : quantityString;
@@ -426,7 +412,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                             Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(this, "This toy already has 0 quantity.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "You have 0 inventory for this toy.", Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,35 +14,29 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/category_overview"
-            style="@style/CategoryStyle" />
+            style="@style/CategoryStyle"
+            android:text="@string/category_overview" />
 
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:paddingLeft="4dp"
-            android:paddingStart="4dp"
+            android:orientation="vertical"
             android:paddingEnd="4dp"
-            android:orientation="vertical">
+            android:paddingLeft="4dp"
+            android:paddingStart="4dp">
 
             <EditText
                 android:id="@+id/edit_toy_name"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/hint_toy_name"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+                android:inputType="textCapWords" />
 
             <EditText
                 android:id="@+id/edit_toy_price"
-                android:hint="@string/hint_toy_price"
-                android:inputType="numberDecimal"
-                style="@style/EditorFieldStyle" />
-
-            <EditText
-                android:id="@+id/edit_toy_quantity"
                 style="@style/EditorFieldStyle"
-                android:hint="@string/hint_toy_quantity"
-                android:inputType="number" />
+                android:hint="@string/hint_toy_price"
+                android:inputType="numberDecimal" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -51,57 +44,72 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/increase_quantity"
-                    style="@style/EditorQuantityButton"
-                    android:text="@string/increase_quantity"/>
-
-                <Button
                     android:id="@+id/decrease_quantity"
                     style="@style/EditorQuantityButton"
-                    android:text="@string/decrease_quantity"/>
+                    android:text="@string/decrease_quantity" />
+
+                <EditText
+                    android:id="@+id/edit_toy_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/hint_toy_quantity"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/increase_quantity"
+                    style="@style/EditorQuantityButton"
+                    android:text="@string/increase_quantity" />
 
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/supplier_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/CategoryStyle"
+            android:text="@string/supplier_category" />
 
         <LinearLayout
-            android:id="@+id/supplier_category"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="2"
+            android:orientation="vertical">
 
-            <TextView
-                style="@style/CategoryStyle"
-                android:text="@string/supplier_category" />
+            <EditText
+                android:id="@+id/edit_toy_supplier_name"
+                style="@style/EditorFieldStyle"
+                android:hint="@string/hint_supplier_name"
+                android:inputType="textCapWords" />
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_toy_supplier_phone_number"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:hint="@string/hint_supplier_phone_number"
+                android:inputType="phone" />
 
-                <EditText
-                    android:id="@+id/edit_toy_supplier_name"
-                    style="@style/EditorFieldStyle"
-                    android:hint="@string/hint_supplier_name"
-                    android:inputType="textCapWords" />
+                <Button
+                    android:id="@+id/order_from_supplier_button"
+                    style="@style/OrderFromSupplierButton"
+                    android:text="@string/order_from_supplier_button" />
 
-                <EditText
-                    android:id="@+id/edit_toy_supplier_phone_number"
-                    style="@style/EditorFieldStyle"
-                    android:hint="@string/hint_supplier_phone_number"
-                    android:inputType="phone" />
-            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/order_from_supplier_button"
-            style="@style/OrderFromSupplierButton"
-            android:text="@string/order_from_supplier_button"/>
-
-        <Button
-            android:id="@+id/delete_toy_button"
-            style="@style/DeleteToyButton"
-            android:text="@string/delete_toy_button"/>
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/delete_toy_button"
+        style="@style/DeleteToyButton"
+        android:text="@string/delete_toy_button" />
+
+</LinearLayout>

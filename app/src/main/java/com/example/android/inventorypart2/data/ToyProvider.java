@@ -22,9 +22,9 @@ public class ToyProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(ToyContract.CONTENT_AUTHORITY, ToyContract.PATH_TOY, TOYS);
+        sUriMatcher.addURI(ToyContract.CONTENT_AUTHORITY, ToyContract.PATH_TOYS, TOYS);
 
-        sUriMatcher.addURI(ToyContract.CONTENT_AUTHORITY, ToyContract.PATH_TOY + "/#", TOY_ID);
+        sUriMatcher.addURI(ToyContract.CONTENT_AUTHORITY, ToyContract.PATH_TOYS + "/#", TOY_ID);
 
     }
 
@@ -72,74 +72,74 @@ public class ToyProvider extends ContentProvider {
         switch (match) {
             case TOYS:
                 return insertToy(uri, contentValues);
-                default:
-                    throw new IllegalArgumentException("Insertion is not supported for " + uri);
+            default:
+                throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
+    }
+
+    private Uri insertToy(Uri uri, ContentValues values) {
+        String nameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
+        if (nameValue == null) {
+            throw new IllegalArgumentException("Toy requires a name.");
         }
 
-       private Uri insertToy(Uri uri, ContentValues values) {
-           String nameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
-           if (nameValue == null) {
-               throw new IllegalArgumentException("Toy requires a name.");
-           }
+        double priceValue = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_PRICE);
+        if (priceValue < 0) {
+            throw new IllegalArgumentException("Toy requires a valid price.");
+        }
 
-           double priceValue = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_PRICE);
-           if (priceValue < 0) {
-               throw new IllegalArgumentException("Toy requires a valid price.");
-           }
+        int quantityValue = values.getAsInteger(ToyEntry.COLUMN_PRODUCT_QUANTITY);
+        if (quantityValue < 0) {
+            throw new IllegalArgumentException("Toy requires a valid quantity.");
+        }
 
-           int quantityValue = values.getAsInteger(ToyEntry.COLUMN_PRODUCT_QUANTITY);
-           if (quantityValue < 0) {
-               throw new IllegalArgumentException("Toy requires a valid quantity.");
-           }
+        String supplierNameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME);
+        if (supplierNameValue == null) {
+            throw new IllegalArgumentException("Toy requires a supplier's name.");
+        }
 
-           String supplierNameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME);
-           if (supplierNameValue == null) {
-               throw new IllegalArgumentException("Toy requires a supplier's name.");
-           }
+        String supplierPhoneNumberValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER);
+        if (supplierPhoneNumberValue == null) {
+            throw new IllegalArgumentException("Toy requires a supplier's phone number.");
+        }
 
-           String supplierPhoneNumberValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER);
-           if (supplierPhoneNumberValue == null) {
-               throw new IllegalArgumentException("Toy requires a supplier's phone number.");
-           }
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-           SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        long id = database.insert(ToyEntry.TABLE_NAME, null, values);
 
-           long id = database.insert(ToyEntry.TABLE_NAME, null, values);
+        if (id == -1) {
+            Log.e(LOG_TAG, "Failed to insert row for " + uri);
+            return null;
+        }
 
-           if (id == -1) {
-               Log.e(LOG_TAG, "Failed to insert row for " + uri);
-               return null;
-           }
+        getContext().getContentResolver().notifyChange(uri, null);
 
-           getContext().getContentResolver().notifyChange(uri, null);
+        return ContentUris.withAppendedId(uri, id);
+    }
 
-           return ContentUris.withAppendedId(uri, id);
-       }
-
-       @Override
-       public int update (Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+    @Override
+    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case TOYS:
                 return updateToy(uri, contentValues, selection, selectionArgs);
             case TOY_ID:
                 selection = ToyEntry._ID + "=?";
-                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateToy(uri, contentValues, selection, selectionArgs);
-                default:
-                    throw new IllegalArgumentException("Update is not supported for " + uri);
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
         }
-       }
+    }
 
-       private int updateToy(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    private int updateToy(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
-            if (values.containsKey(ToyEntry.COLUMN_PRODUCT_NAME)) {
-                String nameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
-                if (nameValue == null) {
-                    throw new IllegalArgumentException("Toy requires a name");
-                }
+        if (values.containsKey(ToyEntry.COLUMN_PRODUCT_NAME)) {
+            String nameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
+            if (nameValue == null) {
+                throw new IllegalArgumentException("Toy requires a name");
             }
+        }
 
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_PRICE)) {
             double priceValue = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_PRICE);

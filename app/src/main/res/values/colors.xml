@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ffffff</color>
 
     <color name="empty_subtitle_color">#A2AAB0</color>
 
@@ -17,6 +17,8 @@
     <color name="listItemName">#2B3D4D</color>
     <color name="listItemPrice">#AEB6BD</color>
     <color name="listItemQunatity">#AEB6BD</color>
+
+    <color name = "main_background_color">#ffffff</color>
 
 
 </resources>
