@@ -25,7 +25,7 @@ public class ToyDbHelper extends SQLiteOpenHelper {
                 + ToyEntry.COLUMN_PRODUCT_PRICE + " REAL NOT NULL, "
                 + ToyEntry.COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
                 + ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME + " TEXT NOT NULL, "
-                + ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER + " LONG NOT NULL); ";
+                + ToyEntry.COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER + " LONG NOT NULL); ";
 
         db.execSQL(SQL_CREATE_TOYS_TABLE);
     }

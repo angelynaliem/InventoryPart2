@@ -19,9 +19,9 @@
 
     <string name="hint_supplier_name">Name</string>
 
-    <string name="hint_supplier_phone_number">Contact No.</string>
+    <string name="hint_supplier_contact_number">Contact No.</string>
 
-    <string name="order_from_supplier_button">Re-Stock</string>
+    <string name="restock_button">Re-Stock</string>
 
     <string name="delete_toy_button">Delete</string>
 
@@ -35,10 +35,10 @@
 
     <string name="editor_activity_title_edit_toy">Edit a Toy</string>
 
-    <string name="name_cannot_be_empty">Please state toy\'s name</string>
-    <string name="price_cannot_be_empty">Please state price</string>
-    <string name="supplier_name_cannot_be_empty">Please state supplier\'s name</string>
-    <string name="supplier_phone_number_cannot_be_empty">Please state supplier\'s contact no.</string>
+    <string name="name_required">Please state toy\'s name</string>
+    <string name="price_required">Please state price</string>
+    <string name="supplier_name_required">Please state supplier\'s name</string>
+    <string name="supplier_contact_number_required">Please state supplier\'s contact no.</string>
 
     <string name="editor_insert_toy_successful">Toy saved</string>
 

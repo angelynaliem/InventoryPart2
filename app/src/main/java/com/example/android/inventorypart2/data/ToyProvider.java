@@ -78,28 +78,28 @@ public class ToyProvider extends ContentProvider {
     }
 
     private Uri insertToy(Uri uri, ContentValues values) {
-        String nameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
-        if (nameValue == null) {
+        String name = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
+        if (name == null) {
             throw new IllegalArgumentException("Please state toy's name");
         }
 
-        double priceValue = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_PRICE);
-        if (priceValue < 0) {
+        double price = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_PRICE);
+        if (price < 0) {
             throw new IllegalArgumentException("Please state price");
         }
 
-        int quantityValue = values.getAsInteger(ToyEntry.COLUMN_PRODUCT_QUANTITY);
-        if (quantityValue < 0) {
+        int quantity = values.getAsInteger(ToyEntry.COLUMN_PRODUCT_QUANTITY);
+        if (quantity < 0) {
             throw new IllegalArgumentException("Please state quantity in stock");
         }
 
-        String supplierNameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME);
-        if (supplierNameValue == null) {
+        String supplierName = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME);
+        if (supplierName == null) {
             throw new IllegalArgumentException("Please state supplier's name");
         }
 
-        String supplierPhoneNumberValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER);
-        if (supplierPhoneNumberValue == null) {
+        String supplierContactNumber = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER);
+        if (supplierContactNumber == null) {
             throw new IllegalArgumentException("Please state supplier's contact no.");
         }
 
@@ -135,36 +135,36 @@ public class ToyProvider extends ContentProvider {
     private int updateToy(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_NAME)) {
-            String nameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
-            if (nameValue == null) {
+            String name = values.getAsString(ToyEntry.COLUMN_PRODUCT_NAME);
+            if (name == null) {
                 throw new IllegalArgumentException("Please state toy's name");
             }
         }
 
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_PRICE)) {
-            double priceValue = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_PRICE);
-            if (priceValue < 0) {
+            double price = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_PRICE);
+            if (price < 0) {
                 throw new IllegalArgumentException("Please state price");
             }
         }
 
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_QUANTITY)) {
-            double quantityValue = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_QUANTITY);
-            if (quantityValue < 0) {
+            double quantity = values.getAsDouble(ToyEntry.COLUMN_PRODUCT_QUANTITY);
+            if (quantity < 0) {
                 throw new IllegalArgumentException("Please state quantity");
             }
         }
 
         if (values.containsKey(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME)) {
-            String supplierNameValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME);
-            if (supplierNameValue == null) {
+            String supplierName = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME);
+            if (supplierName == null) {
                 throw new IllegalArgumentException("Please state supplier's name");
             }
         }
 
-        if (values.containsKey(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER)) {
-            String supplierPhoneNumberValue = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER);
-            if (supplierPhoneNumberValue == null) {
+        if (values.containsKey(ToyEntry.COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER)) {
+            String supplierContactNumber = values.getAsString(ToyEntry.COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER);
+            if (supplierContactNumber == null) {
                 throw new IllegalArgumentException("Please state supplier's contact no.");
             }
         }

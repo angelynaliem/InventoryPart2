@@ -38,11 +38,7 @@ public class ToyCursorAdapter extends CursorAdapter {
         String toyPrice = cursor.getString(priceColumnIndex);
         final int toyQuantity = cursor.getInt(quantityColumnIndex);
 
-        nameTextView.setText(toyName);
-        priceTextView.setText("$" + toyPrice);
-        quantityTextView.setText(toyQuantity + " pcs");
-
-        final int toyID = cursor.getInt(idColumnIndex);
+        final int toyId = cursor.getInt(idColumnIndex);
         final int quantity = cursor.getInt(quantityColumnIndex);
 
         Button saleButton = view.findViewById(R.id.sale_button);
@@ -50,9 +46,14 @@ public class ToyCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 CatalogActivity Activity = (CatalogActivity) context;
-                Activity.doSale(toyID, quantity);
+                Activity.sale(toyId, quantity);
             }
         });
+
+        nameTextView.setText(toyName);
+        priceTextView.setText("$" + toyPrice);
+        quantityTextView.setText(toyQuantity + " pcs");
+
     }
 
 }

@@ -37,11 +37,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private EditText mSupplierNameEditText;
 
-    private EditText mSupplierPhoneNumberEditText;
+    private EditText mSupplierContactNumberEditText;
 
     private Button increaseQuantityButton;
     private Button decreaseQuantityButton;
-    private Button orderFromSupplierButton;
+    private Button restockButton;
     private Button deleteToyButton;
 
     private boolean mToyHasChanged = false;
@@ -54,6 +54,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +63,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         Intent intent = getIntent();
         mCurrentToyUri = intent.getData();
 
-        mNameEditText = findViewById(R.id.edit_toy_name);
-        mPriceEditText = findViewById(R.id.edit_toy_price);
-        mQuantityEditText = findViewById(R.id.edit_toy_quantity);
-        mSupplierNameEditText = findViewById(R.id.edit_toy_supplier_name);
-        mSupplierPhoneNumberEditText = findViewById(R.id.edit_toy_supplier_phone_number);
-
         increaseQuantityButton = findViewById(R.id.increase_quantity);
         decreaseQuantityButton = findViewById(R.id.decrease_quantity);
-        orderFromSupplierButton = findViewById(R.id.order_from_supplier_button);
+        restockButton = findViewById(R.id.restock_button);
         deleteToyButton = findViewById(R.id.delete_toy_button);
 
         if (mCurrentToyUri == null) {
@@ -78,28 +73,28 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
             invalidateOptionsMenu();
 
-            increaseQuantityButton.setVisibility(View.GONE);
-            decreaseQuantityButton.setVisibility(View.GONE);
-            orderFromSupplierButton.setVisibility(View.GONE);
-            deleteToyButton.setVisibility(View.GONE);
         } else {
 
             setTitle(getString(R.string.editor_activity_title_edit_toy));
 
             getLoaderManager().initLoader(EXISTING_TOY_LOADER, null, this);
 
-            increaseQuantityButton.setVisibility(View.VISIBLE);
-            decreaseQuantityButton.setVisibility(View.VISIBLE);
-            orderFromSupplierButton.setVisibility(View.VISIBLE);
-            deleteToyButton.setVisibility(View.VISIBLE);
         }
+
+        mNameEditText = findViewById(R.id.edit_toy_name);
+        mPriceEditText = findViewById(R.id.edit_toy_price);
+        mQuantityEditText = findViewById(R.id.edit_toy_quantity);
+        mSupplierNameEditText = findViewById(R.id.edit_toy_supplier_name);
+        mSupplierContactNumberEditText = findViewById(R.id.edit_toy_supplier_contact_number);
 
         mNameEditText.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mSupplierNameEditText.setOnTouchListener(mTouchListener);
-        mSupplierPhoneNumberEditText.setOnTouchListener(mTouchListener);
+        mSupplierContactNumberEditText.setOnTouchListener(mTouchListener);
+
     }
+
 
     private void saveToy() {
 
@@ -107,44 +102,43 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String priceString = mPriceEditText.getText().toString().trim();
         String quantityString = mQuantityEditText.getText().toString().trim();
         String supplierNameString = mSupplierNameEditText.getText().toString().trim();
-        String supplierPhoneNumberString = mSupplierPhoneNumberEditText.getText().toString().trim();
+        String supplierContactNumberString = mSupplierContactNumberEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(nameString)) {
-            Toast.makeText(this, getString(R.string.name_cannot_be_empty),
-                    Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-        if (TextUtils.isEmpty(priceString)) {
-            Toast.makeText(this, getString(R.string.price_cannot_be_empty),
-                    Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-        if (TextUtils.isEmpty(supplierNameString)) {
-            Toast.makeText(this, getString(R.string.supplier_name_cannot_be_empty),
-                    Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-        if (TextUtils.isEmpty(supplierPhoneNumberString)) {
-            Toast.makeText(this, getString(R.string.supplier_phone_number_cannot_be_empty),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.name_required),
+                    Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        if (TextUtils.isEmpty(quantityString)) {
-            quantityString = "0";
+        if (TextUtils.isEmpty(priceString)) {
+            Toast.makeText(this, getString(R.string.price_required),
+                    Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        if (TextUtils.isEmpty(supplierNameString)) {
+            Toast.makeText(this, getString(R.string.supplier_name_required),
+                    Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        if (TextUtils.isEmpty(supplierContactNumberString)) {
+            Toast.makeText(this, getString(R.string.supplier_contact_number_required),
+                    Toast.LENGTH_SHORT).show();
+            finish();
+            return;
         }
 
         Long quantity = Long.parseLong(quantityString);
-        Long supplierPhoneNumber = Long.parseLong(supplierPhoneNumberString);
+        Long supplierContactNumber = Long.parseLong(supplierContactNumberString);
 
         if (mCurrentToyUri == null &&
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
                 TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierNameString) &&
-                TextUtils.isEmpty(supplierPhoneNumberString)) {
+                TextUtils.isEmpty(supplierContactNumberString)) {
             return;
         }
 
@@ -153,17 +147,17 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         values.put(ToyEntry.COLUMN_PRODUCT_PRICE, priceString);
         values.put(ToyEntry.COLUMN_PRODUCT_QUANTITY, quantity);
         values.put(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME, supplierNameString);
-        values.put(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
+        values.put(ToyEntry.COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER, supplierContactNumber);
 
         if (mCurrentToyUri == null) {
             Uri newUri = getContentResolver().insert(ToyEntry.CONTENT_URI, values);
 
             if (newUri == null) {
                 Toast.makeText(this, getString(R.string.editor_insert_toy_failed),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, getString(R.string.editor_insert_toy_successful),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             }
         } else {
 
@@ -172,10 +166,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             if (rowsAffected == 0) {
 
                 Toast.makeText(this, getString(R.string.editor_update_toy_failed),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, getString(R.string.editor_update_toy_successful),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -197,10 +191,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 finish();
                 return true;
 
+            case R.id.action_delete_all_entries:
+                showDeleteConfirmationDialog();
+                    return true;
+
             case android.R.id.home:
                 if (!mToyHasChanged) {
                     NavUtils.navigateUpFromSameTask(EditorActivity.this);
                     return true;
+
                 }
 
                 DialogInterface.OnClickListener discardButtonClickListener =
@@ -243,7 +242,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 ToyEntry.COLUMN_PRODUCT_PRICE,
                 ToyEntry.COLUMN_PRODUCT_QUANTITY,
                 ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME,
-                ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER};
+                ToyEntry.COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER};
 
         return new CursorLoader(this,
                 mCurrentToyUri,
@@ -264,19 +263,19 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int priceColumnIndex = cursor.getColumnIndex(ToyEntry.COLUMN_PRODUCT_PRICE);
             int quantityColumnIndex = cursor.getColumnIndex(ToyEntry.COLUMN_PRODUCT_QUANTITY);
             int supplierNameColumnIndex = cursor.getColumnIndex(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME);
-            int supplierPhoneNumberColumnIndex = cursor.getColumnIndex(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER);
+            int supplierContactNumberColumnIndex = cursor.getColumnIndex(ToyEntry.COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER);
 
-            String currentName = cursor.getString(nameColumnIndex);
-            String currentPrice = cursor.getString(priceColumnIndex);
-            final int currentQuantity = cursor.getInt(quantityColumnIndex);
-            String currentSupplierName = cursor.getString(supplierNameColumnIndex);
-            final String currentSupplierPhoneNumber = cursor.getString(supplierPhoneNumberColumnIndex);
+            String name = cursor.getString(nameColumnIndex);
+            String price = cursor.getString(priceColumnIndex);
+            int quantity = cursor.getInt(quantityColumnIndex);
+            String supplierName = cursor.getString(supplierNameColumnIndex);
+            final String supplierContactNumber = cursor.getString(supplierContactNumberColumnIndex);
 
-            mNameEditText.setText(currentName);
-            mPriceEditText.setText(currentPrice);
-            mQuantityEditText.setText(Integer.toString(currentQuantity));
-            mSupplierNameEditText.setText(currentSupplierName);
-            mSupplierPhoneNumberEditText.setText(currentSupplierPhoneNumber);
+            mNameEditText.setText(name);
+            mPriceEditText.setText(price);
+            mQuantityEditText.setText(Integer.toString(quantity));
+            mSupplierNameEditText.setText(supplierName);
+            mSupplierContactNumberEditText.setText(supplierContactNumber);
 
             increaseQuantityButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -308,10 +307,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 }
             });
 
-            orderFromSupplierButton.setOnClickListener(new View.OnClickListener() {
+            restockButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", currentSupplierPhoneNumber, null));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", supplierContactNumber, null));
                     startActivity(intent);
                 }
             });
@@ -324,7 +323,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mPriceEditText.setText("");
         mQuantityEditText.setText("");
         mSupplierNameEditText.setText("");
-        mSupplierPhoneNumberEditText.setText("");
+        mSupplierContactNumberEditText.setText("");
     }
 
     private void showUnsavedChangesDialog(
@@ -376,23 +375,23 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             if (rowsDeleted == 0) {
 
                 Toast.makeText(this, getString(R.string.editor_delete_toy_failed),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             } else {
 
                 Toast.makeText(this, getString(R.string.editor_delete_toy_successful),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             }
         }
 
         finish();
     }
 
-    public void updateQuantity(int quantity, boolean decrease) {
+    public void updateQuantity(int quantity, boolean increase) {
 
-        if (decrease) {
-            quantity--;
-        } else {
+        if (increase) {
             quantity++;
+        } else {
+            quantity--;
         }
 
         if (mCurrentToyUri != null) {

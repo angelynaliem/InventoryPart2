@@ -90,18 +90,18 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
+t
                 <EditText
-                    android:id="@+id/edit_toy_supplier_phone_number"
+                    android:id="@+id/edit_toy_supplier_contact_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_supplier_phone_number"
+                    android:hint="@string/hint_supplier_contact_number"
                     android:inputType="phone" />
 
                 <Button
-                    android:id="@+id/order_from_supplier_button"
-                    style="@style/OrderFromSupplierButton"
-                    android:text="@string/order_from_supplier_button" />
+                    android:id="@+id/restock_button"
+                    style="@style/RestockButton"
+                    android:text="@string/restock_button" />
 
             </RelativeLayout>
         </LinearLayout>

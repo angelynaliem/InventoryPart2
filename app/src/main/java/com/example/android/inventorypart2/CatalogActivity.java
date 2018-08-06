@@ -73,7 +73,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         values.put(ToyEntry.COLUMN_PRODUCT_PRICE, 19.99);
         values.put(ToyEntry.COLUMN_PRODUCT_QUANTITY, 5);
         values.put(ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME, "Supplier A");
-        values.put(ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER, "1234567890");
+        values.put(ToyEntry.COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER, "1234567890");
 
         Uri newUri = getContentResolver().insert(ToyEntry.CONTENT_URI, values);
     }
@@ -114,7 +114,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 ToyEntry.COLUMN_PRODUCT_PRICE,
                 ToyEntry.COLUMN_PRODUCT_QUANTITY,
                 ToyEntry.COLUMN_PRODUCT_SUPPLIER_NAME,
-                ToyEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER};
+                ToyEntry.COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER};
 
         return new CursorLoader(this,
                 ToyEntry.CONTENT_URI,
@@ -134,13 +134,13 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         mCursorAdapter.swapCursor(null);
     }
 
-    public void doSale(int toyID, int quantity) {
+    public void sale (int toyId, int quantity) {
         quantity--;
 
         if (quantity >= 0) {
             ContentValues values = new ContentValues();
             values.put(ToyEntry.COLUMN_PRODUCT_QUANTITY, quantity);
-            Uri updateUri = ContentUris.withAppendedId(ToyEntry.CONTENT_URI, toyID);
+            Uri updateUri = ContentUris.withAppendedId(ToyEntry.CONTENT_URI, toyId);
             int rowsAffected = getContentResolver().update(updateUri, values, null, null);
             if (rowsAffected == 0) {
                 Toast.makeText(this, "This toy is sold.", Toast.LENGTH_LONG).show();

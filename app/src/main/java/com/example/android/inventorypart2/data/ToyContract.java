@@ -37,7 +37,7 @@ public class ToyContract {
 
         public final static String COLUMN_PRODUCT_SUPPLIER_NAME = "supplier_name";
 
-        public final static String COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER = "supplier_phone_number";
+        public final static String COLUMN_PRODUCT_SUPPLIER_CONTACT_NUMBER = "supplier_contact_number";
 
     }
 }
